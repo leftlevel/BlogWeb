@@ -15,8 +15,9 @@
                 <div><a target="_blank" class="out-link" href="#">☞后台管理</a></div>
             </div>
         </div>
-        <div class="copyright">Copyright © 2020 by leftlevel . All rights reserved.</div> 
-        <!--  | <a target="_blank" class="out-link" href="http://www.beian.miit.gov.cn">渝ICP备17015355号-1</a> -->
+        <div class="copyright">Copyright © 2020 by leftlevel . All rights reserved. | 
+            <a target="_blank" class="out-link" href="https://beian.miit.gov.cn/">浙ICP备2020039978号-1</a>
+        </div> 
     </div>
 </template>
 
