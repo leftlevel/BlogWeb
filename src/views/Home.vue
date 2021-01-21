@@ -1,7 +1,7 @@
 <template>
     <div class="home">
         <banner isHome="true"></banner>
-        <div class="site-content animate">
+        <div class="site-content animate" id="main-container">
             <!--通知栏-->
             <div class="notify">
                 <div class="search-result" v-if="hideSlogan">
@@ -17,7 +17,7 @@
                     <div style="display: flex;align-items: flex-end;">聚焦<small-ico></small-ico></div>
                 </section-title>
                 <div class="feature-content">
-                    <div class="feature-item" v-for="item in features" :key="item.title">
+                    <div class="feature-item" v-for="item in features" :key="item.id">
                         <Feature :data="item"></Feature>
                     </div>
                 </div>
@@ -27,7 +27,8 @@
             <main class="site-main" :class="{'search':hideSlogan}">
                 <section-title v-if="!hideSlogan">推荐</section-title>
                 <template v-for="item in postList">
-                    <post :post="item" :key="item.id"></post>
+                    <!-- status：审核通过才进行展示 -->
+                    <post :post="item" :key="item.id" v-if="item.status == 2"></post>
                 </template>
             </main>
 
@@ -56,6 +57,7 @@
     import {fetchFocus, fetchList, fetchListBySearchWords} from '../api'
     import { mapState } from 'vuex'
     import store from '@/store'
+    import $ from 'jquery'
 
     export default {
         name: 'Home',
