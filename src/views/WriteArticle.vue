@@ -14,7 +14,7 @@
                     <el-col :span="8">
                         <el-form-item label="分类" prop="type">
                             <el-select size="medium" v-model="article.type" placeholder="请选择文章类型">
-                                <el-option v-for="item in typeList" :key="item.id" :label="item.name" :value="item.id" :disabled="item.status === 1 ? true : false"></el-option>
+                                <el-option v-for="item in typeList" :key="item.id" :label="item.name" :value="item.name" :disabled="item.status === 1 ? true : false"></el-option>
                             </el-select>
                         </el-form-item>
                     </el-col>
@@ -30,7 +30,7 @@
                     <el-input type="textarea" :rows="4" placeholder="请输入文章概述" v-model="article.summary">
                     </el-input>
                 </el-form-item>
-                <mavon-editor :ishljs="true" :box-shadow="false" v-model="article.content"></mavon-editor>
+                <mavon-editor ref="editor" :ishljs="true" :box-shadow="false" v-model="article.content" @imgAdd="handleEditorImgAdd"></mavon-editor>
                 <el-button class="publish" size="medium" type="primary" @click="publish('article')">发布</el-button>
             </el-form>
         </el-col>
@@ -42,6 +42,7 @@
 import { mavonEditor } from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
 import { publish, getTags, getTypes } from '@/api/article'
+import { imgAdd } from '@/api/upload'
 export default {
   data () {
     return {
@@ -106,6 +107,39 @@ export default {
                 }
             })
         },
+        handleEditorImgAdd(pos, $file){
+            let formdata = new FormData()
+            formdata.append('file', $file)
+            //文件大小，单位M
+            let fileSize = $file.size / 1024 / 1024
+            if (fileSize < 1) {
+                imgAdd(formdata).then(res => {
+                    //console.log(res)
+                    if (res.flag) {
+                        let imgUrl = res.data
+                        this.$refs.editor.$img2Url(pos, imgUrl)
+                        this.$notify({
+                            title: '提示',
+                            message: res.message,
+                            type: 'success'
+                        })
+                    } else {
+                        this.$notify({
+                            title: '提示',
+                            message: res.message,
+                            type: 'error'
+                        })
+                    }
+                })
+            } else {
+                // this.$message.warning('文件大小不超过1M,请删除重新上传否则无法显示')
+                this.$notify({
+                    title: '提示',
+                    message: '文件大小不超过1M,请删除重新上传否则无法显示',
+                    type: 'error'
+                })
+            }
+        }
     }
 }
 </script>
