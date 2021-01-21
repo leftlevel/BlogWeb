@@ -31,6 +31,17 @@
                     ></template>
                 </el-input>
             </el-form-item>
+            <el-form-item prop="check_password">
+                <el-input
+                    type="password"
+                    v-model="registerForm.check_password"
+                    placeholder="再次输入密码"
+                >
+                    <template slot="prepend"
+                        ><i class="iconfont iconicon_password"></i
+                    ></template>
+                </el-input>
+            </el-form-item>
             <el-form-item>
                 <el-button type="primary" style="width: 100%" @click="handleRegister('registerForm')">注册</el-button>
             </el-form-item>
@@ -45,10 +56,20 @@ import { register } from '@/api/register'
 
 export default {
     data() {
+        //自定义校验器
+        const validateCheckPass = (rule, value, callback) => {
+            //value 代表 this.registerForm.check_password
+            if (value !== this.registerForm.password) {
+                callback(new Error('两次输入的密码不一致'))
+            } else {
+                callback()
+            }
+        }
         return {
             registerForm: {
                 username: '',
                 password: '',
+                check_password: ''
             },
             rules: {
                 username: [
@@ -57,6 +78,9 @@ export default {
                 password: [
                     { required: true, message: '请输入密码', trigger: 'blur' },
                 ],
+                check_password: [
+                    { validator: validateCheckPass, trigger: 'change'}
+                ]
             },
         }
     },
