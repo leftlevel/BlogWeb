@@ -5,7 +5,7 @@
             :rules="rules"
             :model="form"
             :status-icon="true"
-            label-width="60px"
+            label-width="70px"
             class="login-form"
         >
             <h2 class="login-title">欢迎回来</h2>
@@ -14,6 +14,10 @@
             </el-form-item>
             <el-form-item label="密码" prop="password">
                 <el-input type="password" v-model="form.password"></el-input>
+            </el-form-item>
+            <el-form-item label="验证码" prop="verifyCode" class="verifyCodeItemCss">
+                <el-input type="password" v-model="form.verifyCode" style="width: 60%"></el-input>
+                <div id="v_container"></div>
             </el-form-item>
             <el-form-item>
                 <el-button class="login-button" type="primary" :loading="loadingStatus" @click="submitForm('form')">{{ loadingbtnText }}</el-button>
@@ -26,14 +30,19 @@
 import { login } from '@/api/login'
 import { Base64 } from 'js-base64'
 import { setToken } from '@/utils/auth'
+import { GVerify } from '@/js/verifyCode'
 export default {
+    mounted() {
+        this.verifyCode = new GVerify('v_container')
+    },
     data() {
         return {
             loadingStatus: false,
             loadingbtnText: '登录',
             form: {
                 username: 'admin',
-                password: 'admin'
+                password: 'admin',
+                verifyCode: ''
             },
             rules: {
                 username: [
@@ -41,6 +50,9 @@ export default {
                 ],
                 password: [
                     { required: true, message: '密码不能为空', trigger: 'blur' }
+                ],
+                verifyCode: [
+                    { required: true, message: '验证码不能为空', trigger: ['blur', 'change'] }
                 ]
             }
         }
@@ -50,6 +62,15 @@ export default {
 
     methods: {
         submitForm(formName) {
+            let verifyFlag = this.verifyCode.validate(this.form.verifyCode)
+            if (!verifyFlag) {
+                this.$notify({
+                    title: '系统提示',
+                    message: '验证码输入错误',
+                    type: 'error'
+                })
+                return
+            }
             this.loadingOpen()
             this.$refs[formName].validate(valid => {
                 if (valid) {
@@ -113,5 +134,17 @@ export default {
 }
 .login-button {
     width: 285px;
+}
+/* .verifyCodeItemCss {
+    border: solid 1px red;
+} */
+#v_container {
+    width: auto;
+    height: auto;
+    display: inline-flex;
+    position: relative;
+    top: 1rem;
+    margin-top: -1rem;
+    margin-left: 5px;
 }
 </style>
