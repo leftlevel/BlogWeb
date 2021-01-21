@@ -1,3 +1,10 @@
+/*
+ * @Author: leftlevel
+ * @Date: 2020-08-07 14:09:44
+ * @LastEditors: leftlevel
+ * @LastEditTime: 2020-11-27 21:53:48
+ * @Description: 
+ */
 import Vue from 'vue'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css';
@@ -9,7 +16,7 @@ import './assets/font/iconfont.css'
 //引入wowjs后需要引入
 import 'animate.css'
 
-require('./Mock')
+
 import {parseTime} from './utils'
 //引入路由守卫,权限控制
 import './permission'

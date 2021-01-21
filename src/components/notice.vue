@@ -1,3 +1,10 @@
+<!--
+ * @Author: leftlevel
+ * @Date: 2020-09-21 18:21:19
+ * @LastEditors: leftlevel
+ * @LastEditTime: 2021-01-21 16:38:56
+ * @Description: 公告栏组件
+-->
  <template>
     <!-- 公告栏 -->
     <el-col :span="6" class="notice timeline-item  animate__animated animate__bounce" v-if="isMobile() && show">
@@ -60,7 +67,8 @@ export default {
  .notice {
     width: 250px;
     height: 300px;
-    top: 700px;
+    top: 70%;
+    margin-top: 20%;
     right: 50px; /*定位右边*/
     overflow-y: auto;
     border-radius: 3px;

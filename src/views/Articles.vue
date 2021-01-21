@@ -44,10 +44,10 @@
                                 <div class="donate" @click="showDonate = !showDonate">
                                     <span>赏</span>
                                     <ul class="donate_inner" :class="{'show': showDonate}">
-                                        <li class="wedonate"><img src="https://s1.ax1x.com/2020/10/27/BlGVQx.jpg" >
+                                        <li class="wedonate"><img src="http://img.leftlevel.cn/0dddc2d6ea1b40b397d4a15ca02fdb96.jpg" >
                                             <p>微信</p>
                                         </li>
-                                        <li class="alidonate"><img src="https://s1.ax1x.com/2020/10/27/BlGZy6.jpg" >
+                                        <li class="alidonate"><img src="http://img.leftlevel.cn/e79c35382b81463388c77a1ba2ab19d2.jpg" >
                                             <p>支付宝</p>
                                         </li>
                                     </ul>
@@ -151,7 +151,12 @@ export default {
                         //console.log(res)
                         $('#editor .content').get(0).innerText = ''
                         this.fetchComment()
-                        this.$message.success(res.message)
+                        // this.$message.success(res.message)
+                        this.$notify({
+                            title: '提示',
+                            message: res.message,
+                            type: 'success'
+                        })
                     }
                 })
             }

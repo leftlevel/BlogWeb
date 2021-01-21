@@ -4,7 +4,7 @@
             <div class="user-avatar"><img :src="comment.fromUserAvatar" alt=""></div>
             <div class="head-right">
                 <section-title>
-                    <div style="display: flex;align-items: center;justify-content: space-between;">
+                    <div style="display: flex; align-items: center; justify-content: space-between;">
                         <div>
                             <span class="from-user user-name">{{comment.fromUserName}}</span>
                             <span class="to-user" v-if="comment.toUserName != null"><span style="margin: 0 5px;">@</span><span class="user-name">{{comment.toUserName}}</span></span>
@@ -70,14 +70,18 @@
                     const token = JSON.parse(localStorage.getItem("TOKEN_KEY"))
                     const userString = decodeURIComponent(escape(window.atob(token.split('.')[1])))
                     const user = JSON.parse(userString)
-                    console.log(content, user)
-                    console.log(111)
+                    // console.log(content, user)
+                    // console.log(111)
 
                     insertComment({ articleId: this.comment.articleId, content: content, fromUserAvatar: user.avatar, fromUserName: user.aud, toUserName: this.toUserName}).then(res => {
                         if (res.flag) {
                             //console.log(res)
                             this.$emit('fetchComment')
-                            this.$message.success(res.message)
+                            this.$notify({
+                                title: '提示',
+                                message: res.message,
+                                type: 'success'
+                            })
                             this.close()
                         }
                     })
