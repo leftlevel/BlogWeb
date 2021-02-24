@@ -30,21 +30,6 @@
                                 >Element-ui</a
                             >
                         </p>
-                        <!-- <p>
-                            <a
-                                target="_blank"
-                                href="https://gitee.com/fengziy/Gblog"
-                                style="color: #ff6d6d;"
-                                >Gitee仓库</a
-                            >
-                            |
-                            <a
-                                target="_blank"
-                                href="https://github.com/fengziye/Gblog"
-                                style="color: #ff6d6d;"
-                                >Github仓库</a
-                            >记得star★哟
-                        </p> -->
                     </div>
                 </div>
                 <div class="about-me about-info">
@@ -52,20 +37,6 @@
                         ><span>❤</span>给我留言</section-title
                     >
                     <div class="info-card">
-                        <!-- <div class="contactForm">
-                            <div class="form-item">
-                                <label for="mail">邮箱</label>
-                                <input class="v" type="email" name="mail" id="mail">
-                            </div>
-                            <div class="form-item">
-                                <label for="content">内容</label>
-                                <textarea class="v" id="content" name="content"></textarea>
-                            </div>
-                            <div class="form-item">
-                                <label></label>
-                                <button>提交</button>
-                            </div>
-                        </div> -->
                         <el-form
                             :rules="rules"
                             ref="pojoForm"
