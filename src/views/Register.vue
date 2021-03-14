@@ -1,5 +1,5 @@
 <template>
-    <div class="page-login" @keyup.enter="login">
+    <div class="page-login">
         <div class="page-login--layer page-login--layer-area">
             <ul class="circles">
                 <li v-for="n in 10" :key="n"></li>
@@ -15,6 +15,13 @@
             <h2 class="title">欢迎注册</h2>
             <el-form-item prop="username">
                 <el-input v-model="registerForm.username" placeholder="账号">
+                    <template slot="prepend"
+                        ><i class="iconfont iconyonghu"></i
+                    ></template>
+                </el-input>
+            </el-form-item>
+            <el-form-item prop="email">
+                <el-input v-model="registerForm.email" placeholder="邮箱">
                     <template slot="prepend"
                         ><i class="iconfont iconyonghu"></i
                     ></template>
@@ -68,6 +75,7 @@ export default {
         return {
             registerForm: {
                 username: '',
+                email: '',
                 password: '',
                 check_password: ''
             },
@@ -75,10 +83,14 @@ export default {
                 username: [
                     { required: true, message: '请输入账号', trigger: 'blur' },
                 ],
+                email: [
+                    { required: true, message: '请正确输入邮箱', trigger: ['blur', 'change'], type: 'email'},
+                ],
                 password: [
                     { required: true, message: '请输入密码', trigger: 'blur' },
                 ],
                 check_password: [
+                    { required: true, message: '不能为空', trigger: 'blur' },
                     { validator: validateCheckPass, trigger: 'change'}
                 ]
             },
@@ -93,7 +105,7 @@ export default {
                 if (valid) {
                     const base64Password = Base64.encode(this.registerForm.password)
                     const md5Password = this.$md5(base64Password)
-                    register({username: this.registerForm.username, password: md5Password}).then(res => {
+                    register({ username: this.registerForm.username, email: this.registerForm.email, password: md5Password }).then(res => {
                         if (res.flag) {
                             this.$message.success(res.message)
                             this.$router.push({path: '/login'})
