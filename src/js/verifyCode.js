@@ -57,6 +57,7 @@ GVerify.prototype = {
     /** 生成验证码**/
     refresh: function () {
         var canvas = document.getElementById(this.options.canvasId)
+        this.options.code = ''
         if (canvas.getContext) {
             var ctx = canvas.getContext('2d')
         }
