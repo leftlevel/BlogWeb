@@ -16,7 +16,7 @@
                 <el-input type="password" v-model="form.password"></el-input>
             </el-form-item>
             <el-form-item label="验证码" prop="verifyCode" class="verifyCodeItemCss">
-                <el-input type="password" v-model="form.verifyCode" style="width: 60%"></el-input>
+                <el-input type="text" v-model="form.verifyCode" style="width: 60%"></el-input>
                 <div id="v_container"></div>
             </el-form-item>
             <el-form-item>
@@ -39,6 +39,7 @@ export default {
         return {
             loadingStatus: false,
             loadingbtnText: '登录',
+            verifyCode: {},
             form: {
                 username: 'admin',
                 password: 'admin',
