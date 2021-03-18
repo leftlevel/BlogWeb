@@ -16,7 +16,7 @@
                 <el-input type="password" v-model="form.password"></el-input>
             </el-form-item>
             <el-form-item label="验证码" prop="verifyCode" class="verifyCodeItemCss">
-                <el-input type="text" v-model="form.verifyCode" style="width: 60%"></el-input>
+                <el-input type="text" v-model="form.verifyCode" style="width: 60%" @keyup.enter.native="submitForm('form')"></el-input>
                 <div id="v_container"></div>
             </el-form-item>
             <el-form-item>
