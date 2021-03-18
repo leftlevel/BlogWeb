@@ -28,7 +28,7 @@
                 <section-title v-if="!hideSlogan">推荐</section-title>
                 <template v-for="item in postList">
                     <!-- status：审核通过才进行展示 -->
-                    <post :post="item" :key="item.id" v-if="item.status == 2"></post>
+                    <post :post="item" :key="item.id" v-if="item.status === 2" :isNew="postList.length === item.id"></post>
                 </template>
             </main>
 

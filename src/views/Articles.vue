@@ -38,7 +38,7 @@
                                 <!-- 阅读次数 -->
                                 <div class="post-like">
                                     <i class="inconfont iconeyes"></i>
-                                    <span class="count">{{ article.viewsCount }}</span>
+                                    <span class="count">阅读次数：{{ article.viewsCount }}</span>
                                 </div>
                                 <!-- 赞助按钮 -->
                                 <div class="donate" @click="showDonate = !showDonate">

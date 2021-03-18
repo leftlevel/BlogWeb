@@ -7,7 +7,7 @@
                 </router-link>
             </div>
             <h1 class="entry-title">
-                <router-link :to="`/article/${post.id}`"><span v-if="post.isTop" style="color:#ff6d6d;font-weight:600">[置顶] </span>{{post.title}}</router-link>
+                <router-link :to="`/article/${post.id}`"><span v-if="isNew" style="color:#ff6d6d;font-weight:600">[NEW]</span>{{post.title}}</router-link>
             </h1>
             <div class="p-time">
                 <i class="iconfont iconmeditor-time"></i> {{post.pubTime | parseTime}}<i v-if="post.isHot" class="iconfont iconfire" style="margin-left: 5px;color: #ff6d6d;"></i>
@@ -41,6 +41,9 @@
         props: {
             post: {
                 type: Object
+            },
+            isNew: {
+                type: Boolean
             }
         }
     }
